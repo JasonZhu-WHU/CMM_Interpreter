@@ -1,0 +1,6 @@
+C:\Users\35131\source\repos\CMM_Interpreter\RunningWindow\bin\Debug\RunningWindow.exe.config
+C:\Users\35131\source\repos\CMM_Interpreter\RunningWindow\bin\Debug\RunningWindow.exe
+C:\Users\35131\source\repos\CMM_Interpreter\RunningWindow\bin\Debug\RunningWindow.pdb
+C:\Users\35131\source\repos\CMM_Interpreter\RunningWindow\obj\Debug\RunningWindow.csproj.CoreCompileInputs.cache
+C:\Users\35131\source\repos\CMM_Interpreter\RunningWindow\obj\Debug\RunningWindow.exe
+C:\Users\35131\source\repos\CMM_Interpreter\RunningWindow\obj\Debug\RunningWindow.pdb

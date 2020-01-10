@@ -1,0 +1,53 @@
+// test.cmm 主要用来测试数值运算符 关系运算符 数字 无法识别的符号等
+int a = 1;
+int b = 2;
+
+int a += a;
+if(true && false)
+else{
+}
+if(a == null)
+nul
+a + b - - c ----c + 2 --2
+a = 0214
+if(a<>b)
+if(a&b)
+//^
+a = 1.22
+//b = 1.32 + -- 1.24112.324
+//a = .965
+
+int main()
+{
+    //顺序结构（赋值语句、输入read、输出write）
+    int a = 3;
+    int b = 4;
+    int c[4]={1,1,1,};
+    read a;
+    write b;
+    //选择语句（if-else）
+    if (a == 1) {
+        write b;
+    } else {
+        write a;
+    }
+
+    //循环结构（while）
+    while(a<0){
+        write a;
+        a=a-1;
+    }
+
+    //关系表达式+算术表达式
+    if(a==b){
+        int addition=a+b;
+    }
+    if(a<b){
+        int subtraction=b-a;
+    }
+    if(a>b){
+			int multiplication=a*b;
+    }else{
+        int division=b/a;
+    }
+}

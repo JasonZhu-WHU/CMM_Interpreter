@@ -1,0 +1,383 @@
+options
+{
+  //我发现也可以不设定
+}
+
+PARSER_BEGIN(CMM_Interpreter)
+package cmm;
+import java.util.*;
+
+public class CMM_Interpreter
+{
+  public Node rootNode()
+  {
+    return jjtree.rootNode();
+  }
+}
+
+PARSER_END(CMM_Interpreter)
+
+SKIP :
+{
+  " "
+| "\t"
+| "\n"
+| "\r"
+| < "//" (~[ "\n", "\r" ])*
+    (
+      "\n"
+    | "\r"
+    | "\r\n"
+    ) >
+| < "/*" (~[ "*" ])* "*"
+    (
+      "*"
+    | ~[ "*", "/" ] (~[ "*" ])* "*"
+    )*
+    "/" >
+}
+
+//定义关键字
+TOKEN :
+{
+  < IF : "if" >
+| < ELSE : "else" >
+| < WHILE : "while" >
+| < READ : "read" >
+| < WRITE : "write" >
+| < INT : "int" >
+| < REAL : "real" >
+}
+
+//定义int
+TOKEN :
+{
+  < INTEGER_LITERAL :
+    (
+      [ "1"-"9" ] (< DIGIT >)*
+    | "0"
+    )
+  |
+    (
+      "-" [ "1"-"9" ] (< DIGIT >)*
+    | "0"
+    ) >
+}
+
+//定义real
+TOKEN :
+{
+  < REAL_LITERAL :
+    (
+      "-"
+      (
+        (< DIGIT >)+
+      | (< DIGIT >)+ "."
+      | (< DIGIT >)+ "." (< DIGIT >)+
+      | "." (< DIGIT >)+
+      )
+    )
+  |
+    (
+      (< DIGIT >)+
+    | (< DIGIT >)+ "."
+    | (< DIGIT >)+ "." (< DIGIT >)+
+    | "." (< DIGIT >)+
+    ) >
+}
+
+//定义标识符
+TOKEN :
+{
+  < IDENTIFIER :
+    < LETTER >
+  | < LETTER >
+    (
+      < LETTER >
+    | < DIGIT >
+    | "_"
+    )*
+    (
+      < LETTER >
+    | < DIGIT >
+    )+ >
+| < #LETTER : [ "a"-"z", "A"-"Z" ] >
+| < #DIGIT : [ "0"-"9" ] >
+}
+
+void Start() :
+{}
+{
+  Procedure() 
+  < EOF >
+}
+
+void Procedure() #void :
+{}
+{
+  (
+    Statement()
+  )*
+}
+
+void Statement() #void :
+{}
+{
+  Declaration()
+| Assignment()
+| WhileStmt()
+| ReadStmt()
+| IfStmt()
+| WriteStmt()
+| Block()
+}
+
+void Block() :
+{}
+{
+  "{"
+  (
+    Statement()
+  )*
+  "}"
+}
+
+void WhileStmt() :
+{}
+{
+  < WHILE > "(" Condition() ")" Block()
+}
+
+void ReadStmt() :
+{}
+{
+  < READ > Expression() ";"
+}
+
+void WriteStmt() :
+{}
+{
+  < WRITE > Expression() ";"
+}
+
+void IfStmt() :
+{}
+{
+  LOOKAHEAD(< IF > "(" Condition() ")" Block())
+  (
+    < IF > "(" Condition() ")" Block() < ELSE >
+  )+
+  Block()
+| < IF > "(" Condition() ")" Block()
+}
+
+void Condition() #void :
+{}
+{
+  EqualityExpression()
+}
+
+/** Equality expression. */
+void EqualityExpression() #void :
+{}
+{
+  RelationalExpression()
+  (
+    "==" RelationalExpression() #EQNode(2)
+| 
+  "<>" RelationalExpression() #NENode(2)
+)*
+}
+
+/** Relational expression. */
+void RelationalExpression() #void :
+{}
+{
+  Expression()
+  (
+    "<" Expression() #LTNode(2)
+| 
+  ">" Expression() #GTNode(2)
+| 
+"<=" Expression() #LENode(2)
+| 
+">=" Expression() #GENode(2)
+)*
+}
+
+void Declaration() #void :
+{}
+{
+  (
+    LOOKAHEAD(2)
+    ScalarDeclaration()
+  | 
+    FormDeclaration()
+  )
+  ";"
+}
+
+void ScalarDeclaration() :
+{
+  Token t;
+}
+{
+  (
+    < INT >
+    {
+      
+    }
+  | 
+    < REAL >
+    {
+      
+    }
+  )
+  t = < IDENTIFIER >
+  {
+    
+  }
+}
+
+void FormDeclaration() :
+{
+  Token t, t2;
+}
+{
+  (
+    < INT > "["
+    [
+      t2 = < INTEGER_LITERAL >
+      {
+        
+      }
+    ]
+    "]"
+    {
+      
+    }
+  | 
+    < REAL > "["
+    [
+      t2 = < INTEGER_LITERAL >
+      {
+        
+      }
+    ]
+    "]"
+    {
+      
+    }
+  )
+  t = < IDENTIFIER >
+  {
+    
+  }
+}
+
+void Assignment() #Assignment(2) :
+{}
+{
+  Id() "=" Expression() ";"
+  {
+    
+  }
+}
+
+void Expression() #void :
+{}
+{
+  [ "-" ] Term()
+  (
+    "+" Term()
+    {
+      
+    }
+    #AddNode(2)
+| 
+  "-" Term()
+  {
+    
+  }
+  #SubNode(2)
+)*
+}
+
+void Term() #void :
+{}
+{
+  Factor()
+  (
+    "*" Factor()
+    {
+      
+    }
+    #MulNode(2)
+| 
+  "/" Factor()
+  {
+    
+  }
+  #DivNode(2)
+)*
+}
+
+void Factor() #void :
+{}
+{
+  Id()
+| Literal()
+| "(" Expression() ")"
+}
+
+void Id() #void :
+{}
+{
+  LOOKAHEAD(2)
+  FormId()
+| 
+  ScalarId()
+}
+
+void ScalarId() :
+{
+  Token t;
+}
+{
+  t = < IDENTIFIER >
+  {
+    
+  }
+}
+
+void FormId() :
+{
+  Token t1, t2;
+}
+{
+  t1 = < IDENTIFIER > 
+  "[" t2 = < INTEGER_LITERAL > "]"
+  {
+    
+  }
+}
+
+void Literal() #void :
+{
+  Token t;
+}
+{
+  (
+    t = < INTEGER_LITERAL >
+    {
+      
+    }
+  ) #IntConstNode
+| 
+  (
+  t = < REAL_LITERAL >
+  {
+    
+  }
+) #RealConstNode
+}

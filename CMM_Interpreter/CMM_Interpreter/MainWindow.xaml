@@ -1,0 +1,167 @@
+﻿<Window x:Class="CMM_Interpreter.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CMM_Interpreter"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:smtx="clr-namespace:ShowMeTheXAML;assembly=ShowMeTheXAML"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal" 
+        TextOptions.TextRenderingMode="Auto"        
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        mc:Ignorable="d"
+        Title="CMM_Interpreter" Height="720" Width="1080">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.TextBox.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <ToolBar HorizontalAlignment="Left" Height="38" Margin="10,0,0,0" VerticalAlignment="Top" Width="1080"/>
+        <DockPanel Margin="0,0,0.333,-0.333">
+            <smtx:XamlDisplay Key="menus_1" DockPanel.Dock="Top" Margin="5,5,0,5" BorderThickness="0" BorderBrush="#FF686868" HorizontalAlignment="Left" Width="1068">
+                <Menu IsMainMenu="True" Width="130">
+                    <MenuItem Header="_File">
+                        <MenuItem Header="New" Name="New_File" Click="New_File_Click">
+                            <MenuItem.Icon>
+                                <materialDesign:PackIcon Kind="Note"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Header="Open" Name="Open" Click="Open_Click">
+                            <MenuItem.Icon>
+                                <materialDesign:PackIcon Kind="Folder"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Header="Save" Name="Save" Click="Save_Click">
+                            <MenuItem.Icon>
+                                <materialDesign:PackIcon Kind="ContentSave"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Header="Save As.." />
+                        <MenuItem Header="Exit" InputGestureText="Ctrl+E" Name="Exit" Click="Exit_Click">
+                            <MenuItem.Icon>
+                                <materialDesign:PackIcon Kind="ExitToApp" />
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <Separator />
+                        <MenuItem Header="Excellent" IsCheckable="True" IsChecked="True" />
+                        <MenuItem Header="Rubbish" IsCheckable="True" />
+                        <MenuItem Header="Dig Deeper" InputGestureText="Ctrl+D">
+                            <MenuItem Header="Enlightenment?" IsCheckable="True" />
+                            <MenuItem Header="Disappointment" IsCheckable="True" />
+                        </MenuItem>
+                        <MenuItem Header="Look Deeper" InputGestureText="Ctrl+D">
+                            <MenuItem Header="Plain" />
+                            <MenuItem Header="Ice Cream" />
+                        </MenuItem>
+                    </MenuItem>
+                    <MenuItem Header="_Edit">
+                        <MenuItem Header="_Cut" Command="Cut">
+                            <MenuItem.Icon>
+                                <materialDesign:PackIcon Kind="ContentCut" />
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Header="_Copy" Command="Copy">
+                            <MenuItem.Icon>
+                                <materialDesign:PackIcon Kind="ContentCopy" />
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Header="_Paste" Command="Paste">
+                            <MenuItem.Icon>
+                                <materialDesign:PackIcon Kind="ContentPaste" />
+                            </MenuItem.Icon>
+                        </MenuItem>
+                    </MenuItem>
+                </Menu>
+            </smtx:XamlDisplay>
+
+            <smtx:XamlDisplay Key="menus_2" DockPanel.Dock="Top" BorderThickness="0" BorderBrush="#FF909090" HorizontalAlignment="Left" Width="1073">
+                <ToolBarTray Margin="0,0,-496,-0.333">
+                    <ToolBar Style="{DynamicResource MaterialDesignToolBar}" ClipToBounds="False">
+                        <Button ToolTip="Save" Click="Save_Click">
+                            <materialDesign:PackIcon Kind="ContentSave" />
+                        </Button>
+                        <Separator />
+                        <Button Command="Cut" ToolTip="Cut" ToolBar.OverflowMode="AsNeeded">
+                            <materialDesign:PackIcon Kind="ContentCut" />
+                        </Button>
+                        <Button Command="Copy" ToolTip="Copy that stuff" ToolBar.OverflowMode="AsNeeded">
+                            <materialDesign:PackIcon Kind="ContentCopy" />
+                        </Button>
+                        <Separator />
+                        <Button Command="Paste" ToolTip="Paste some stuff" ToolBar.OverflowMode="AsNeeded">
+                            <materialDesign:PackIcon Kind="ContentPaste" />
+                        </Button>
+                        <Button ToolTip="词法分析" Click="Lex_OnClick">
+                            <materialDesign:PackIcon Kind="ScriptText"/>
+                        </Button>
+                        <Button ToolTip="语法分析" Click="ParserButton_OnClick">
+                            <materialDesign:PackIcon Kind="VectorPolygon"/>
+                        </Button>
+                        <Button ToolTip="解释运行" Click="Semantic_Analyze_Button_Click" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
+                            <materialDesign:PackIcon Kind="Play" />
+                        </Button>
+                        <!-- when badging in a toolbar, make sure the parent ToolBar.ClipToBounds="False", and
+                     manually apply the button style -->
+                        <!--<materialDesign:Badged ToolBar.OverflowMode="AsNeeded" Badge="{materialDesign:PackIcon Alert}" >
+                            <Button ToolTip="解释运行" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
+                                <materialDesign:PackIcon Kind="Play" />
+                            </Button>
+                        </materialDesign:Badged>-->
+                        <Label Content="Font size:" VerticalAlignment="Center"/>
+                        <ComboBox>
+                            <ComboBoxItem Content="10"/>
+                            <ComboBoxItem IsSelected="True" Content="12"/>
+                            <ComboBoxItem Content="14"/>
+                            <ComboBoxItem Content="16"/>
+                        </ComboBox>
+                        <CheckBox Name="Lex_Check">
+                            导出词法分析结果
+                        </CheckBox>
+                        <CheckBox Name="Gra_Output" Click="Gra_Output_Click">
+                            导出语法树
+                        </CheckBox>
+                        <Button ToolTip="Take a nap" ToolBar.OverflowMode="Always">
+                            <materialDesign:PackIcon Kind="Hotel" />
+                        </Button>
+                        <RadioButton GroupName="XXX" Content="异步方式" />
+                        <!--<RadioButton GroupName="XXX" Content="Ga Ga" />-->
+                        <Separator/>
+                        <RadioButton GroupName="YYY" Style="{StaticResource MaterialDesignToolRadioButton}">
+                            <materialDesign:PackIcon Kind="CashUsd"/>
+                        </RadioButton>
+                        <!--<RadioButton GroupName="YYY" Style="{StaticResource MaterialDesignToolRadioButton}">
+                            <materialDesign:PackIcon Kind="Tree"/>
+                        </RadioButton>-->
+                        <RadioButton GroupName="YYY" Style="{StaticResource MaterialDesignToolRadioButton}">
+                            <materialDesign:PackIcon Kind="About"/>
+                        </RadioButton>
+                        <Separator/>
+                        <ToggleButton/>
+                    </ToolBar>
+                </ToolBarTray>
+            </smtx:XamlDisplay>
+
+            <smtx:XamlDisplay Key="fields_1" Margin="30,0,42.333,0" Cursor="IBeam" Background="#FFF2EEC7" DockPanel.Dock="Top" Height="246">
+                <RichTextBox x:Name="codeBox" VerticalContentAlignment="Top" HorizontalContentAlignment="Left" materialDesign:ScrollBarAssist.ButtonsVisibility="Visible" AcceptsReturn="True" AcceptsTab="True"
+                     materialDesign:HintAssist.Hint="请打开或者新建一个文件，或者直接在这里进行编辑"
+                         Margin="0,0,-506.333,0" VerticalScrollBarVisibility="Auto"/>
+            </smtx:XamlDisplay>
+            <smtx:XamlDisplay Key="fields_2" Cursor="IBeam" Background="#FF616161" DockPanel.Dock="Top" Height="244" Margin="30,0,42.333,0" Foreground="#DDFFFFFF">
+                <TextBox x:Name="resultBox" VerticalContentAlignment="Top" HorizontalContentAlignment="Left" materialDesign:ScrollBarAssist.ButtonsVisibility="Visible" AcceptsReturn="True" AcceptsTab="True"
+                     materialDesign:HintAssist.Hint="输出结果"
+                         VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Margin="0,0,-500.333,0"/>
+            </smtx:XamlDisplay>
+
+        </DockPanel>
+    </Grid>
+</Window>

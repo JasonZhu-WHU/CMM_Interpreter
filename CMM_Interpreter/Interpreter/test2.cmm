@@ -1,0 +1,47 @@
+// test.cmm 主要用来检测标识符的边缘错误
+//标识符（由数字、字母和下划线组成的串，但必须以字母开头、且不能以下划线结尾的串）。
+
+int a = 1;
+int b = 2;
+int c_1 = 3;
+int d312;
+int d 321;
+real 23e;
+//real _2e;
+//int 23_ = 3;
+//int _;
+
+int main()
+{
+    //顺序结构（赋值语句、输入read、输出write）
+    int a = 3;
+    int b = 4;
+    int c[4]={1,1,1,};
+    read a;
+    write b;
+    //选择语句（if-else）
+    if (a == 1) {
+        write b;
+    } else {
+        write a;
+    }
+
+    //循环结构（while）
+    while(a<0){
+        write a;
+        a=a-1;
+    }
+
+    //关系表达式+算术表达式
+    if(a==b){
+        int addition=a+b;
+    }
+    if(a<b){
+        int subtraction=b-a;
+    }
+    if(a>b){
+			int multiplication=a*b;
+    }else{
+        int division=b/a;
+    }
+}

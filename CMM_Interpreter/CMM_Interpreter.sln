@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2003
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CMM_Interpreter", "CMM_Interpreter\CMM_Interpreter.csproj", "{988F2D9A-C963-4EF9-B80F-9C8170776460}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RunningWindow", "RunningWindow\RunningWindow.csproj", "{A556F3FC-B1FA-44AA-AC50-ACF58FF13BD3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{988F2D9A-C963-4EF9-B80F-9C8170776460}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{988F2D9A-C963-4EF9-B80F-9C8170776460}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{988F2D9A-C963-4EF9-B80F-9C8170776460}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{988F2D9A-C963-4EF9-B80F-9C8170776460}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A556F3FC-B1FA-44AA-AC50-ACF58FF13BD3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A556F3FC-B1FA-44AA-AC50-ACF58FF13BD3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A556F3FC-B1FA-44AA-AC50-ACF58FF13BD3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A556F3FC-B1FA-44AA-AC50-ACF58FF13BD3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D3148153-B5AE-4B36-9219-AF907810F267}
+	EndGlobalSection
+EndGlobal

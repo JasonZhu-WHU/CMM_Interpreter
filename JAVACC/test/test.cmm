@@ -1,0 +1,52 @@
+int a;
+real b;
+int[10] r;
+
+real repeat;
+	read repeat;
+	write repeat;
+	/*
+	repeat = (-1+2*3/(4-3)+(+3)-(-2)/(4 * 4 + 2)/(4/4*3)/2.0);
+	*/
+	write repeat;
+    if (a>b==2+3<>repeat){
+        write (repeat);
+    }
+	else{
+		write(k[2]);
+	}
+	write(k[2]);
+    if(1){
+		write s;
+        if(b){
+			int num;
+			read num;
+			while(num>0){
+				write num;
+				if(num > 4){
+					num = num - 2;
+				}
+				else{
+					num = num - 3;
+				}
+			}
+			write (s);
+            if(c+1){
+                if(d==4){
+					write(num);
+                }
+				else{
+					write(num1);
+				}
+            }
+			else{
+				write(num2);
+			}
+        }
+		else{
+			write(num3);
+		}
+    }
+	else{
+		write(num4);
+	}

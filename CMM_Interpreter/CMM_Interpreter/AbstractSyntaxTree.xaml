@@ -1,0 +1,53 @@
+﻿<Window x:Class="CMM_Interpreter.AbstractSyntaxTree"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        xmlns:local="clr-namespace:CMM_Interpreter"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:smtx="clr-namespace:ShowMeTheXAML;assembly=ShowMeTheXAML"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal" 
+        TextOptions.TextRenderingMode="Auto"        
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        Title="AbstractSyntaxTree" Height="650" Width="1200">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Button.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.PopupBox.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.TextBlock.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <smtx:XamlDisplay Key="AST" VerticalContentAlignment="Top" Margin="0,61,10.333,-0.333" RenderTransformOrigin="0.928,0.495">
+                <TreeView Name="myAST">
+                    <TreeViewItem Name="myAST_Node1">
+                        <TreeViewItem.Header>
+                            <StackPanel Orientation="Horizontal">
+                                <Viewbox Width="16" Height="16">
+                                    <Canvas Width="24" Height="24">
+                                        <Path Data="M3,12V6.75L9,5.43V11.91L3,12M20,3V11.75L10,11.9V5.21L20,3M3,13L9,13.09V19.9L3,18.75V13M20,13.25V22L10,20.09V13.1L20,13.25Z" 
+                                          Fill="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeViewItem}}, Path=Foreground}" />
+                                    </Canvas>
+                                </Viewbox>
+                                <TextBlock Margin="8 0 0 0">Abstract Syntax Tree</TextBlock>
+                            </StackPanel>
+                        </TreeViewItem.Header>
+                    </TreeViewItem>
+                </TreeView>
+            </smtx:XamlDisplay>
+            <Button Name="Expand_Btn" Content="Expand Completely" HorizontalAlignment="Right" Margin="0,24,981.333,0" VerticalAlignment="Top" Width="181" Background="#FF19191A" FontFamily="Cambria" FontSize="16" Click="Expand_Btn_Click"/>
+            <Button Name="Collapse_Btn" Content="Collapse Completely" HorizontalAlignment="Right" Margin="0,24,726.333,0" VerticalAlignment="Top" Width="181" Background="#FF19191A" FontFamily="Cambria" FontSize="16" Click="Collapse_Btn_Click"/>
+        </Grid>
+    </ScrollViewer>
+</Window>

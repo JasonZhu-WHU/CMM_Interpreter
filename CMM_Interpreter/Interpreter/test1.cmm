@@ -1,0 +1,41 @@
+// test1.cmm 主要用来测试最正常的一个程序
+int a = 1;
+int b = 2;
+
+int main()
+{
+    //顺序结构（赋值语句、输入read、输出write）
+    int a = 3;
+    int b = 4;
+    int c[4]={1,1,1,};
+    read a;
+    write b;
+    //选择语句（if-else）
+    if (a == 1) {
+        write b;
+    } else {
+        write a;
+    } /*
+int
+efwhufeiju二负欸u uv红e6T^*#7
+*/
+    //循环结构（while）
+    while(a<0){
+        write a;
+        a=a-1;
+    }
+
+    //关系表达式+算术表达式
+    if(a==b || false){
+        int addition=a+b;
+    }
+    if(a<b and null == null){
+        int subtraction=b-a;
+    }
+    if(a>b && true){
+			int multiplication=a*b;
+    }else{
+        int division=b/a;
+    }
+		
+}
